@@ -1,6 +1,6 @@
 package com.UD20B.model.Ejercicio2;
 
-public class LasButtonApp {
+public class LastButtonApp {
 	/*
 	 * @uthor: Isabel Calzadilla
 	 * UD20B : Ejercicio2
