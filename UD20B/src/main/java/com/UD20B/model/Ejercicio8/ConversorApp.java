@@ -1,20 +1,19 @@
-package com.UD20B.model.Ejercicio7;
+package com.UD20B.model.Ejercicio8;
 
 import java.awt.EventQueue;
 
-public class MoneyConversorApp {
+public class ConversorApp {
 
 		public static void main(String[] args) {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						MoneyConversor frame = new MoneyConversor();
+						Conversor frame = new Conversor();
 						frame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
 			});
-		}
-
+	}
 }

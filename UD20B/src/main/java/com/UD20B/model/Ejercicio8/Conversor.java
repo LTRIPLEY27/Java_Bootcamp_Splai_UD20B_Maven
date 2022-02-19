@@ -1,20 +1,20 @@
-package com.UD20B.model.Ejercicio7;
+package com.UD20B.model.Ejercicio8;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.Font;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
-public class MoneyConversor extends JFrame {
-
+public class Conversor extends JFrame {
 	private JPanel panel;
 	private JTextField txtMoney;
 	private JTextField txtConvert;
@@ -22,9 +22,11 @@ public class MoneyConversor extends JFrame {
 	private JButton euros;
 	private JButton pesetas;
 	private double cambio;
+	private JLabel lblNewLabel;
+	private JButton btnBorrar;
 	private final double PESETAS = 166.386;
 
-	public MoneyConversor() {
+	public Conversor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		panel = new JPanel();
@@ -52,12 +54,12 @@ public class MoneyConversor extends JFrame {
 		txtConvert.setColumns(10);
 		
 		euros = new JButton("Euros a Ptas");
-		euros.setBounds(98, 96, 113, 23);
+		euros.setBounds(46, 96, 113, 23);
 		euros.addActionListener(act);
 		panel.add(euros);
 		
 		pesetas = new JButton("Cambiar");
-		pesetas.setBounds(221, 96, 114, 23);
+		pesetas.setBounds(166, 96, 114, 23);
 		pesetas.addActionListener(act);
 		panel.add(pesetas);
 		
@@ -70,25 +72,37 @@ public class MoneyConversor extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel.setBounds(146, 11, 168, 14);
 		panel.add(lblNewLabel);
+		
+		btnBorrar = new JButton("Borrar");
+		btnBorrar.setBounds(290, 96, 114, 23);
+		btnBorrar.addActionListener(act);
+		panel.add(btnBorrar);
 	}
 	
 	ActionListener act = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			double convert = Double.parseDouble(txtMoney.getText());
-			if(e.getSource() == euros) {
-				cambio = convert * PESETAS;
-				showMoney.enable(true);
-				showMoney.setText("Cambio Euros");
-				txtConvert.setText(String.valueOf(cambio));
-			} if(e.getSource() == pesetas) {
-				cambio = convert / PESETAS;
-				showMoney.enable(true);
-				showMoney.setText("Cambio Pesetas");
-				txtConvert.setText(String.valueOf(cambio));
+			try {//EXCEPTION QUE DISPARA SI EL FORMATO NO ES NUMERICO
+				double convert = Double.parseDouble(txtMoney.getText());
+					if(e.getSource() == euros) {
+						cambio = convert * PESETAS;
+						showMoney.enable(true);
+						showMoney.setText("Cambio Euros");
+						txtConvert.setText(String.valueOf(cambio));
+					} if(e.getSource() == pesetas) {
+						cambio = convert / PESETAS;
+						showMoney.enable(true);
+						showMoney.setText("Cambio Pesetas");
+						txtConvert.setText(String.valueOf(cambio));
+					}
+					 if(e.getSource() == btnBorrar) {
+						txtMoney.setText(" ");
+						txtConvert.setText(" ");
+					}}
+			catch (NumberFormatException ex) {
+				JOptionPane.showMessageDialog(panel, "DEBE DE INTRODUCIR NÚMEROS");	
 			}
-			
 		}
 	};
-	private JLabel lblNewLabel;
+
 }
